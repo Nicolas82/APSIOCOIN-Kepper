@@ -4,6 +4,11 @@ on:
     tags:
       - v[0-9]+\.[0-9]+\.[0-9]+
       - v[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+
+  workflow_dispatch:
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true 
 
 jobs:
   prepare-release:
