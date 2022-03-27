@@ -51,7 +51,7 @@ module.exports = () => {
     ...conf({
       version,
       DIST: 'dist',
-      PLATFORMS: ['chrome', 'firefox', 'opera', 'edge'],
+      PLATFORMS: ['opera', 'firefox', 'chrome', 'edge'],
       LANGS: ['en'],
       PAGE_TITLE: 'Waves Keeper',
       isProduction,

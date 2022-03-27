@@ -27,7 +27,7 @@ import {
   PermissionsController,
   PreferencesController,
   RemoteConfigController,
-  StatisticsController,
+  //StatisticsController,
   SwapController,
   TrashController,
   TxInfoController,
@@ -366,12 +366,12 @@ class BackgroundService extends EventEmitter {
     });
 
     //Statistics
-    this.statisticsController = new StatisticsController(
-      initState.StatisticsController,
-      {
-        network: this.networkController,
-      }
-    );
+    // this.statisticsController = new StatisticsController(
+    //   initState.StatisticsController,
+    //   {
+    //     network: this.networkController,
+    //   }
+    // );
 
     this.swapController = new SwapController({
       initState: initState.SwapController,
@@ -396,7 +396,7 @@ class BackgroundService extends EventEmitter {
 
     // Single state composed from states of all controllers
     this.store.updateStructure({
-      StatisticsController: this.statisticsController.store,
+      //StatisticsController: this.statisticsController.store,
       PreferencesController: this.preferencesController.store,
       WalletController: this.walletController.store,
       NetworkController: this.networkController.store,
@@ -461,7 +461,7 @@ class BackgroundService extends EventEmitter {
       unlock: async password => this.walletController.unlock(password),
       initVault: async password => {
         const result = await this.walletController.initVault(password);
-        this.statisticsController.addEvent('initVault');
+        //this.statisticsController.addEvent('initVault');
         return result;
       },
       deleteVault: async () => {
@@ -485,7 +485,7 @@ class BackgroundService extends EventEmitter {
           address
         );
         const message = this.messageController.getMessageById(messageId);
-        this.statisticsController.sendTxEvent(message);
+        //this.statisticsController.sendTxEvent(message);
         return approveData;
       },
       reject: async (messageId, forever) =>
@@ -531,7 +531,7 @@ class BackgroundService extends EventEmitter {
 
       // origin settings
       allowOrigin: async origin => {
-        this.statisticsController.addEvent('allowOrigin', { origin });
+        //this.statisticsController.addEvent('allowOrigin', { origin });
         this.messageController.rejectByOrigin(origin);
         this.permissionsController.deletePermission(
           origin,
@@ -541,7 +541,7 @@ class BackgroundService extends EventEmitter {
       },
 
       disableOrigin: async origin => {
-        this.statisticsController.addEvent('disableOrigin', { origin });
+        //this.statisticsController.addEvent('disableOrigin', { origin });
         this.permissionsController.deletePermission(
           origin,
           PERMISSIONS.APPROVED
@@ -563,8 +563,8 @@ class BackgroundService extends EventEmitter {
           0
         );
       },
-      sendEvent: async (event, properties) =>
-        this.statisticsController.addEvent(event, properties),
+      sendEvent: async (event, properties) => {},
+        //this.statisticsController.addEvent(event, properties),
       updateBalances: this.currentAccountController.updateBalances.bind(
         this.currentAccountController
       ),
@@ -911,7 +911,7 @@ class BackgroundService extends EventEmitter {
         );
       });
 
-      this.statisticsController.sendOpenEvent();
+      //this.statisticsController.sendOpenEvent();
     };
 
     dnode.on('remote', remoteHandler);

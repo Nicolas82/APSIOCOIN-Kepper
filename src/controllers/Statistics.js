@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react';
 import ObservableStore from 'obs-store';
 import { libs } from '@waves/waves-transactions';
-import { statisticsApiKey } from '../../config.json';
+//import { statisticsApiKey } from '../../config.json';
 import extension from 'extensionizer';
 import { detect } from '../lib/detectBrowser';
 import { WAVESKEEPER_ENV } from '../constants';
@@ -84,7 +84,8 @@ export class StatisticsController {
               Accept: '*/*',
             },
             body: JSON.stringify({
-              api_key: statisticsApiKey,
+              //api_key: statisticsApiKey,
+              api_key: null,
               events: events,
             }),
           });
